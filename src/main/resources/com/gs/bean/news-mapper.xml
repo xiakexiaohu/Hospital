@@ -14,6 +14,21 @@
         ]]>
     </select>
 
+    <delete id="deleteById" parameterType="string">
+        <![CDATA[
+          delete from t_news where id=#{id}
+        ]]>
+    </delete>
+
+    <!--ibatis批量删除必须使用list不能使用String[]，会报错-->
+    <!--不需要对<![CDATA[]]>对数据预先解析，否则报错-->
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from t_news where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")" >
+            #{ids}
+        </foreach>
+    </delete>
+
     <select id="queryByTitle" resultType="list" resultMap="newsResultMap">
         <![CDATA[
         select * from t_news limit 9
@@ -32,12 +47,39 @@
         ]]>
     </select>
 
+    <!--模糊查询，拼接sql，为了防止注入将'%#{name}%' 改成 "%"#{name}"%"-->
     <select id="queryByPagerAndCriteria" resultType="list" resultMap="newsResultMap">
-        <![CDATA[
-        select * from t_news where 1 = 1
-        ]]>
-        limit #{pager.beginIndex}, #{pager.pageSize}
 
+        <!--select * from t_news-->
+        <!--<where>-->
+            <!--1 = 1-->
+            <!--<if test="news.title != null">-->
+               <!--and title like "%"#{news.title}"%"-->
+            <!--</if>-->
+            <!--<if test="news.author != null">-->
+                <!--and author like "%"#{news.author}"%"-->
+            <!--</if>-->
+            <!--<if test="news.abstracts != null">-->
+                <!--and abstracts like "%"#{news.abstracts}"%"-->
+            <!--</if>-->
+        <!--</where>-->
+        <!--order by pub_time desc-->
+        <!--limit #{pager.beginIndex}, #{pager.pageSize}-->
+
+        <![CDATA[
+          select * from t_news where 1 = 1
+        ]]>
+        <if test="news.title !=null and news.title != ''">
+            and title like concat('%',#{news.title},'%')
+        </if>
+        <if test="news.author !=null and news.author !=''">
+            and author like concat('%',#{news.author},'%')
+        </if>
+        <if test="news.abstracts !=null and news.abstracts !=''">
+            and abstracts like concat('%',#{news.abstracts},'%')
+        </if>
+        order  by pub_time desc
+        limit #{pager.beginIndex},#{pager.pageSize}
     </select>
 
     <select id="countByCriteria" resultType="int">
@@ -57,5 +99,7 @@
         update t_news set title = #{title}, author = #{author}, content = #{content}, abstracts=#{abstracts} where id = #{id}
         ]]>
     </update>
+
+
 
 </mapper>

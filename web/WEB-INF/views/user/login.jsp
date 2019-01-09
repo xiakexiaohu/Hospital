@@ -180,7 +180,7 @@
                     <div style="padding-left: 50px; padding-right: 50px;">
                         <span style="float: left;">还没有账号？<a href="<%=path %>/user/reg_page">立即注册</a></span>
 
-                        <a href="<%=path %>/index" style="float: right;">返回首页</a>
+                        <!--<a href="<%=path %>/index" style="float: right;">返回首页</a>-->
                     </div>
                 </form>
             </div>

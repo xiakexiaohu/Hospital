@@ -48,6 +48,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public int deleteByIds(List<String> ids) {
+        return adminDAO.deleteByIds(ids);
+    }
+
+    @Override
     public int update(Admin admin) {
         return adminDAO.update(admin);
     }

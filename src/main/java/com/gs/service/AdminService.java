@@ -16,4 +16,6 @@ public interface AdminService extends BaseService<Admin, String> {
 
     public int countByCriteria(Admin admin);
 
+    public int deleteByIds(List<String> list);
+
 }

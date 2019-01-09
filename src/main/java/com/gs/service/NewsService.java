@@ -16,4 +16,5 @@ public interface NewsService extends BaseService<News, String> {
 
     public List<News> queryByTitle();
 
+    public int deleteByIds(List<String> list);
 }

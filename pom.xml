@@ -65,6 +65,29 @@
             <scope>compile</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-core</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-core</artifactId>-->
+            <!--<version>${spring}</version>-->
+        <!--</dependency>-->
+
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -202,5 +225,25 @@
         </dependency>
 
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat8-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 端口号，可自定义 -->
+                    <port>8080</port>
+                    <!-- 项目访问路径 -->
+                    <path>/qing</path>
+                    <!-- Tomcat Manager的url访问路径，固定写法 -->
+                    <url>http://localhost:8080/manager/text</url>
+                    <!-- Tomcat Manager的用户名和密码 -->
+                    <username>tomcat</username>
+                    <password>tomcat</password>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

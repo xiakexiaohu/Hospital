@@ -30,13 +30,14 @@
     <script type="text/javascript" charset="utf-8" src="<%=path %>/ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="<%=path %>/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
+<!--SingleSelect控制单选多选-->
 <body>
 <table id="list" class="easyui-datagrid" toolbar="#tb" style="height:100%;"
        data-options="
         url:'<%=path %>/news/search_pager',
         method:'get',
 				rownumbers:true,
-				singleSelect:true,
+				singleSelect:false,
 				autoRowHeight:false,
 				pagination:true,
 				border:false,
@@ -60,12 +61,30 @@
     </thead>
 </table>
 <div id="tb">
+    <div class="input_small">
+        <form id="searchForm" modalAttribute="user">
+            标题:<input type="text" name="title" class="easyui-textbox"/>
+            作者:<input type="text" name="author" class="easyui-textbox"/>
+            摘要:<input type="text" name="abstracts" class="easyui-textbox"/>
+            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+               onclick="doSearch();">搜索</a>
+            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+               onclick="searchAll();">查询所有</a>
+            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload'"
+               onclick="refreshAll();">刷新</a>
+        </form>
+    </div>
+
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-add" plain="true"
        onclick="openAddWinFitPos('addWin', 'addEditor');">添加</a>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
        onclick="showEdit();">修改</a>
+    <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-clear" plain="true"
+       onclick="showDelete();">删除</a>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-search" plain="true"
        onclick="seeContent();">查看内容</a>
+
+
 </div>
 
 <div class="easyui-window site_win_small input_big" id="addWin" data-options="title:'添加新闻动态',resizable:false,mode:true,closed:true" style="width:700px; height:500px">

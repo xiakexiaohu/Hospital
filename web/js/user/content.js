@@ -17,10 +17,10 @@
 
 
 //判断当前页面是否在iframe中
-if (top == this) {
-    var gohome = '<div class="gohome"><a class="animated bounceInUp" href="/index" title="返回首页"><img src="../../images/home.png"</a></div>';
-    $('body').append(gohome);
-}
+// if (top == this) {
+//     var gohome = '<div class="gohome"><a class="animated bounceInUp" href="/index" title="返回首页"><img src="../../images/home.png"</a></div>';
+//     $('body').append(gohome);
+// }
 
 //animation.css
 function animationHover(element, animation) {

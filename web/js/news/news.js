@@ -40,7 +40,32 @@ function showEdit() {
         UE.getEditor("editEditor").setContent(row.content, false);
         openWin("editWin");
     } else {
-        $.messager.alert("提示", "请选择需要修改的医生信息", "info");
+        $.messager.alert("提示", "请选择需要修改的新闻信息", "info");
+    }
+}
+
+function showDelete(){
+    var row = selectedRows("list");
+    if (row.length!=0) {
+        if(window.confirm("确认要删除？")){
+            //批量删除，判断数组长度
+            var ids="";
+            for(var i=0;i<row.length;i++){
+                if(i!=row.length-1){
+                    ids+=row[i].id+",";
+                }else{
+                    ids+=row[i].id;
+                }
+            }
+            $.post(contextPath + "/news/delete",{"ids":ids},function (data) {
+                if (data.result == "success") {
+                    dataGridReload("list");
+                }
+                $.messager.alert("提示",data.message,"info");
+            });
+        }
+    }else {
+        $.messager.alert("提示", "请选择需要删除的新闻信息", "info");
     }
 }
 
@@ -89,3 +114,4 @@ function searchAll() {
 function refreshAll() {
     $("#list").datagrid("reload");
 }
+

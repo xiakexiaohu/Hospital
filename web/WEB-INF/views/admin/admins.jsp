@@ -32,7 +32,7 @@
         url:'<%=path %>/admin/search_pager',
         method:'get',
 				rownumbers:true,
-				singleSelect:true,
+				singleSelect:false,
 				autoRowHeight:false,
 				pagination:true,
 				border:false,
@@ -50,7 +50,7 @@
         <th field="email" width="150">邮箱</th>
         <th field="name" width="100">姓名</th>
         <th field="phone" width="120">手机号</th>
-        <th field="createTime" width="150" formatter="formatterDate">创建时间</th>
+        <th field="createdTime" width="150" formatter="formatterDate">创建时间</th>
     </tr>
     </thead>
 </table>
@@ -59,6 +59,8 @@
        onclick="openWinFitPos('addWin');">添加</a>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
        onclick="showEdit();">修改</a>
+    <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-clear" plain="true"
+       onclick="showDelete('${sessionScope.admin.email}');">删除</a>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
        onclick="showUpdatePwd();">修改密码</a>
     <div class="input_small">
@@ -66,14 +68,14 @@
             邮箱:<input type="email" name="email" class="easyui-textbox"/>
             姓名:<input type="text" name="name" class="easyui-textbox"/>
             手机:<input type="text" name="phone" class="easyui-textbox"/>
-            状态:<select id="statusSearch" name="status" class="easyui-combobox" data-options="valueField: 'id',textField: 'text',panelHeight:'auto',
-                    data: [{
-                        id: 'Y',
-                        text: '可用'
-                    },{
-                        id: 'N',
-                        text: '不可用'
-                    }]">
+            <%--状态:<select id="statusSearch" name="status" class="easyui-combobox" data-options="valueField: 'id',textField: 'text',panelHeight:'auto',--%>
+                    <%--data: [{--%>
+                        <%--id: 'Y',--%>
+                        <%--text: '可用'--%>
+                    <%--},{--%>
+                        <%--id: 'N',--%>
+                        <%--text: '不可用'--%>
+                    <%--}]">--%>
         </select>
             <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
                onclick="doSearch();">搜索</a>
@@ -124,7 +126,7 @@
         <table>
             <tr>
                 <td>邮箱:</td>
-                <td><input type="text" name="email" class="easyui-textbox" readonly/></td>
+                <td><input type="text" name="email" class="easyui-textbox" disabled="true"/></td>
             </tr>
             <tr>
                 <td>姓名:</td>

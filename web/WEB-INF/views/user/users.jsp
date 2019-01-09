@@ -32,7 +32,7 @@
         url:'<%=path %>/user/search_pager',
         method:'get',
 				rownumbers:true,
-				singleSelect:true,
+				singleSelect:false,
 				autoRowHeight:false,
 				pagination:true,
 				border:false,

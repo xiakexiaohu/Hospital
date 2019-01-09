@@ -184,7 +184,7 @@
                     <div style="padding-left: 50px; padding-right: 50px;">
                         <span style="float: left;">已有账号？<a href="<%=path %>/user/login_page">立即登入</a></span>
 
-                        <a href="<%=path %>/index" style="float: right;">返回首页</a>
+                        <!--<a href="<%=path %>/index" style="float: right;">返回首页</a>&ndash;&gt;-->
                     </div>
                 </form>
             </div>

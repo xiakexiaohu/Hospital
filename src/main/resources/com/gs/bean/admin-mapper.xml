@@ -13,6 +13,15 @@
         ]]>
     </select>
 
+    <!--ibatis批量删除必须使用list不能使用String[]，会报错-->
+    <!--不需要对<![CDATA[]]>对数据预先解析，否则报错-->
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from t_admin where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
     <select id="query" parameterType="admin" resultMap="adminResultMap">
         <![CDATA[
         select * from t_admin where email=#{email} and pwd = #{pwd}

@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +49,26 @@ public class NewsController {
             return ControllerResult.getNotLoginResult("登录信息无效，请重新登录");
         }
     }
+
+    //json传递过来的值，需要采用如下@RequestParam获取
+    @ResponseBody
+    @RequestMapping(value = "delete",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public ControllerResult delById(@RequestParam(value="ids") String ids, HttpSession session) {
+        List<String> idsList = new ArrayList<String>();
+        String[] idsArray = ids.split(",");
+        for (String id : idsArray) {
+            idsList.add(id);
+        }
+        if (SessionUtil.isAdmin(session)) {
+//            newsService.deleteById(ids);
+            newsService.deleteByIds(idsList);
+            logger.info("Delete news successfully");
+            return ControllerResult.getSuccessResult("成功删除新闻");
+        } else {
+            return ControllerResult.getFailResult("删除失败新闻");
+        }
+    }
+
 
     @RequestMapping(value = "list_page", method = RequestMethod.GET)
     public String toListPage(HttpSession session) {

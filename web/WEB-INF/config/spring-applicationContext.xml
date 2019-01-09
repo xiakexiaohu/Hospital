@@ -2,8 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-       <context:component-scan base-package="com.gs"/>
+
+    <!-- 加载mongodb的属性配置文件 -->
+    <!--<context:property-placeholder location="classpath:mongodb.properties" />-->
+    <!--<context:property-placeholder location="WEB-INF/config/mongodb.properties"/>-->
+
+    <!--1.开启注解-->
+    <!--<context:annotation-config />-->
+
+    <!--2.配置包扫描-->
+    <context:component-scan base-package="com.gs"/>
+
+    <!--3.服务器连接信息-->
+    <!--<mongo:mongo-client host="${mongo.host}" port="${mongo.port}"></mongo:mongo-client>-->
+
+    <!--4.创建mongoTemplate模版-->
+    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">-->
+        <!--<constructor-arg ref="mongo"/>-->
+        <!--&lt;!&ndash;设置使用的数据库名&ndash;&gt;-->
+        <!--<constructor-arg name="databaseName" value="${mongo.dbname}"/>-->
+    <!--</bean>-->
+
+
 
 </beans>

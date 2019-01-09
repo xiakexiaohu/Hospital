@@ -20,4 +20,5 @@ public interface NewsDAO extends BaseDAO<News, String> {
 
     public List<News> queryByTitle();
 
+    //TODO
 }

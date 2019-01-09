@@ -48,6 +48,11 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public int deleteByIds(List<String> ids) {
+        return newsDAO.deleteByIds(ids);
+    }
+
+    @Override
     public int update(News news) {
         return newsDAO.update(news);
     }
@@ -72,6 +77,7 @@ public class NewsServiceImpl implements NewsService {
         return newsDAO.countByCriteria(news);
     }
 
+    @Override
     public List<News> queryByTitle() {
         return newsDAO.queryByTitle();
     }

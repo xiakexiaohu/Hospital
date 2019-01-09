@@ -68,12 +68,12 @@
         <table>
             <tr>
                 <td>邮箱:</td>
-                <td><form:input type="text" path="email" class="easyui-textbox" readonly="true"/></td>
+                <td><form:input type="text" path="email" class="easyui-textbox" disabled="true"/></td>
             </tr>
             <tr>
                 <td>姓名:</td>
                 <td><form:input type="text" path="name" class="easyui-validatebox easyui-textbox"
-                                data-options="required:true,novalidate:true"/></td>
+                                data-options="required:true,novalidate:true" /></td>
             </tr>
             <tr>
                 <td>手机:</td>

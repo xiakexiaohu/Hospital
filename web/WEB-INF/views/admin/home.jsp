@@ -19,6 +19,15 @@
     <script type="text/javascript" src="<%=path %>/js/jquery-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="<%=path %>/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="<%=path %>/js/site_easyui.js"></script>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+    <%--<script type="text/javascript">--%>
+        <%--function URLencode(username,pwd) {--%>
+            <%--pwd = escape(pwd);--%>
+            <%--location.href="http://localhost:8081/manage/login?username="+username+"&password="+pwd;--%>
+        <%--}--%>
+    <%--</script>--%>
+
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north',border:false" class="north">
@@ -32,26 +41,39 @@
 </div>
 <div data-options="region:'west',split:true,title:'功能菜单'" class="west">
     <div class="easyui-accordion" data-options="border:false">
-        <div title="医院管理" class="site_menu">
-            <a href="javascript:void(0);" src="<%=path %>/hospital/query" class="site-navi-tab">医院信息</a></p>
-            <a href="javascript:void(0);" src="<%=path %>/dept/list_page" class="site-navi-tab">科室列表</a></p>
-            <a href="javascript:void(0);" src="<%=path %>/doctor/list_page" class="site-navi-tab">医生列表</a></p>
-        </div>
-        <div title="用户管理" class="site_menu">
-            <a href="javascript:void(0);" src="<%=path %>/user/list_page" class="site-navi-tab">用户列表</a></p>
-        </div>
+        <%--<div title="医院管理" class="site_menu">--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/hospital/query" class="site-navi-tab">医院信息</a></p>--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/dept/list_page" class="site-navi-tab">科室列表</a></p>--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/doctor/list_page" class="site-navi-tab">医生列表</a></p>--%>
+        <%--</div>--%>
+        <%--<div title="用户管理" class="site_menu">--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/user/list_page" class="site-navi-tab">用户列表</a></p>--%>
+        <%--</div>--%>
         <div title="新闻管理" class="site_menu">
             <a href="javascript:void(0);" src="<%=path %>/news/list_page" class="site-navi-tab">新闻列表</a></p>
         </div>
-        <div title="文章管理" class="site_menu">
-            <a href="javascript:void(0);" src="<%=path %>/articleType/list_page" class="site-navi-tab">文章类型列表</a></p>
-            <a href="javascript:void(0);" src="<%=path %>/article/list_page" class="site-navi-tab">文章列表</a></p>
-        </div>
-        <div title="消息管理" class="site_menu">
+        <%--<div title="文章管理" class="site_menu">--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/articleType/list_page" class="site-navi-tab">文章类型列表</a></p>--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/article/list_page" class="site-navi-tab">文章列表</a></p>--%>
+        <%--</div>--%>
+            <div title="留言管理" class="site_menu">
             <a href="javascript:void(0);" src="<%=path %>/msg/list_page" class="site-navi-tab">消息列表</a></p>
-        </div>
+            </div>
+            <div title="预约管理" class="site_menu">
+                <a href="javascript:void(0);" src="<%=path %>/articleType/list_page" class="site-navi-tab">文章类型列表</a></p>
+                <a href="javascript:void(0);" src="<%=path %>/article/list_page" class="site-navi-tab">文章列表</a></p>
+            </div>
+            <div title="问卷管理" class="site_menu">
+                <a href="javascript:void(0)"  src="http://localhost:8081/manage/login?username=${sessionScope.admin.email }&password=${sessionScope.admin.pwd }"  class="site-navi-tab">问卷测试</a></p>
+            </div>
+        <%--<div title="消息管理" class="site_menu">--%>
+            <%--<a href="javascript:void(0);" src="<%=path %>/msg/list_page" class="site-navi-tab">消息列表</a></p>--%>
+        <%--</div>--%>
         <div title="系统管理" class="site_menu">
-            <a href="javascript:void(0);" src="<%=path %>/admin/list_page" class="site-navi-tab">管理员列表</a></p>
+            <!--过滤当前用户(email定义为账号)是否为admin@开头-->
+            <c:if test="${fn:startsWith(sessionScope.admin.email,'admin@')}">
+            <a href="javascript:void(0);" src="<%=path %>/admin/list_page" class="site-navi-tab">用户列表</a></p>
+            </c:if>
             <a href="javascript:void(0);" src="<%=path %>/admin/query/${sessionScope.admin.id }" class="site-navi-tab">账号信息</a></p>
             <a href="javascript:void(0);" src="<%=path %>/admin/setting_page" class="site-navi-tab">账号设置</a></p>
         </div>
@@ -67,7 +89,7 @@
 
 <div data-options="region:'south',border:false" style="padding:10px auto 10px auto;text-align:center;">
     ***医院系统V1.0<br />
-    地址：赣州市&nbsp;&nbsp;技术支持:Wgssmart
+    地址：南京理工大学&nbsp;&nbsp;技术支持:njust
 </div>
 
 <div id="mm" class="easyui-menu">

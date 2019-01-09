@@ -33,6 +33,44 @@ function add() {
     }
 }
 
+function showDelete(userEmail) {
+    var row = selectedRows("list");
+    if(row.length!=0){
+        if(window.confirm("确认要删除?")){
+            var sameUserFlag=false;
+            var ids="";
+            var emails="";
+            for(var i=0;i<row.length;i++){
+                if(i!=row.length-1){
+                    ids+=row[i].id+",";
+                    emails+=row[i].email+",";
+                }else{
+                    ids+=row[i].id;
+                    emails+=row[i].email;
+                }
+
+                if (row[i].email == userEmail) {
+                    sameUserFlag=true;
+                    this.alert("您不能删除当前账户！！！");
+                    break;
+                }
+            }
+            //判断是否包含当前用户
+            if(!sameUserFlag){
+                //执行批量删除操作
+                $.post(contextPath + "/admin/delete", {"ids": ids, "emails": emails}, function (data) {
+                    if (data.result == "success") {
+                        dataGridReload("list");
+                    }
+                    $.messager.alert("提示", data.message, "info");
+                });
+            }
+        }
+    }else{
+        $.messager.alert("提示", "请选择需要删除的用户信息", "info");
+    }
+}
+
 function showEdit() {
     var row = selectedRow("list");
     if (row) {
@@ -42,6 +80,7 @@ function showEdit() {
         $.messager.alert("提示", "请选择需要修改的管理员信息", "info");
     }
 }
+
 
 function edit() {
     toValidate("editForm");
@@ -73,14 +112,14 @@ function showUpdatePwd() {
         $("#update_password").textbox("setValue", "");
         openWin("editPwdWin");
     } else {
-        $.messager.alert("提示", "请选择需要修改密码的管理员", "info");
+        $.messager.alert("提示", "请选择需要修改密码的用户", "info");
     }
 }
 
 function updatePwd() {
     toValidate("editPwdForm");
     if (validateForm("editPwdForm")) {
-        $.messager.confirm("提示", "更新该管理员密码，是否继续?", function(r) {
+        $.messager.confirm("提示", "更新该用户密码，是否继续?", function(r) {
             if (r) {
                 $.post(contextPath + "/admin/update_other_pwd",
                     $("#editPwdForm").serialize(),

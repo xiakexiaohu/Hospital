@@ -20,4 +20,6 @@ public interface BaseDAO<T, PK extends Serializable> {
     public List<T> queryByPager(Pager pager);
     public int count();
 
+    public int deleteByIds(List<String> ids);
+
 }
