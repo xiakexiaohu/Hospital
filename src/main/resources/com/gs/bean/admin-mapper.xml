@@ -28,10 +28,20 @@
         ]]>
     </select>
 
+    <!--模糊查询，拼接sqsl，为了防止注入将'%#{name}%'改成 "%"#{name}"%"-->
     <select id="queryByPagerAndCriteria" resultType="list" resultMap="adminResultMap">
         <![CDATA[
         select * from t_admin where 1 = 1
         ]]>
+        <if test="admin.email !=null and admin.email !=''">
+            and email like concat('%',#{admin.email},'%')
+        </if>
+        <if test="admin.name !=null and admin.name !=''">
+            and name like concat('%',#{admin.name},'%')
+        </if>
+        <if test="admin.phone !=null and admin.phone !=''">
+            and phone like concat('%',#{admin.phone},'%')
+        </if>
         order by created_time desc
         limit #{pager.beginIndex}, #{pager.pageSize}
 
