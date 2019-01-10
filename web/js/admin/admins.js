@@ -77,7 +77,7 @@ function showEdit() {
         $("#editForm").form("load", row);
         openWin("editWin");
     } else {
-        $.messager.alert("提示", "请选择需要修改的管理员信息", "info");
+        $.messager.alert("提示", "请选择需要修改的用户信息", "info");
     }
 }
 
@@ -116,7 +116,11 @@ function showUpdatePwd() {
     }
 }
 
+//更新用户密码
 function updatePwd() {
+    //因为Mysql传递的id，而Mongodb根据username(即mysql中的email)删除
+    //对前段jsp页面修改email为hidden属性
+    var row=selectedRow("list");
     toValidate("editPwdForm");
     if (validateForm("editPwdForm")) {
         $.messager.confirm("提示", "更新该用户密码，是否继续?", function(r) {
@@ -147,7 +151,7 @@ function inactive() {
     var row = selectedRow("list");
     if (row) {
         if (row.status == 'N') {
-            $.messager.alert("提示", "管理员不可用,无需冻结", "info");
+            $.messager.alert("提示", "用户不可用,无需冻结", "info");
         } else {
             $.get(contextPath + "/admin/inactive?id=" + row.id,
                 function (data) {
@@ -162,7 +166,7 @@ function inactive() {
                 });
         }
     } else {
-        $.messager.alert("提示", "请选择需要冻结的管理员", "info");
+        $.messager.alert("提示", "请选择需要冻结的用户", "info");
     }
 }
 
@@ -170,7 +174,7 @@ function active() {
     var row = selectedRow("list");
     if (row) {
         if (row.status == 'Y') {
-            $.messager.alert("提示", "管理员可用,无需激活", "info");
+            $.messager.alert("提示", "用户可用,无需激活", "info");
         } else {
             $.get(contextPath + "/admin/active?id=" + row.id,
                 function (data) {
@@ -185,7 +189,7 @@ function active() {
                 });
         }
     } else {
-        $.messager.alert("提示", "请选择需要激活的管理员", "info");
+        $.messager.alert("提示", "请选择需要激活的用户", "info");
     }
 }
 

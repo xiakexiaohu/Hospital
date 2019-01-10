@@ -6,11 +6,10 @@ import com.gs.common.bean.ControllerResult;
 import com.gs.common.bean.Pager;
 import com.gs.common.bean.Pager4EasyUI;
 import com.gs.common.util.EncryptUtil;
-import com.gs.common.util.MongoDBUtil;
 import com.gs.common.util.PagerUtil;
 import com.gs.common.web.SessionUtil;
 import com.gs.service.AdminService;
-import com.mongodb.MongoClient;
+import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
@@ -20,6 +19,7 @@ import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -49,6 +49,9 @@ public class AdminController {
 
     @Resource
     private AdminService adminService;
+
+    @Resource
+    private MongoTemplate mongoTemplate;//自动注入MongoTemplate
 
     @RequestMapping(value = "login_page", method = RequestMethod.GET)
     public String toLoginPage(Model model) {
@@ -90,7 +93,13 @@ public class AdminController {
         if (SessionUtil.isAdmin(session)) {
             admin.setPwd(EncryptUtil.md5Encrypt(admin.getPwd()));
             adminService.insert(admin);
-            logger.info("Add admin successfully");
+            DBCollection mongoTemplateCollection = mongoTemplate.getCollection("admins");
+            logger.info("Add admin successfully in MySQL");
+            BasicDBObject basicDBObject = new BasicDBObject();
+            basicDBObject.put("username", admin.getEmail());
+            basicDBObject.put("password", admin.getPwd());
+            mongoTemplateCollection.insert(basicDBObject);
+            logger.info("Insert into MongoDB Successfully!!!");
             return ControllerResult.getSuccessResult("成功添加管理员");
         } else {
             return ControllerResult.getNotLoginResult("登录信息无效，请重新登录");
@@ -147,7 +156,7 @@ public class AdminController {
         if (SessionUtil.isAdmin(session)) {
             logger.info("update admin info successfully");
             adminService.update(admin);
-            return ControllerResult.getSuccessResult("成功更新管理员信息");
+            return ControllerResult.getSuccessResult("成功更新用户信息");
         } else {
             return ControllerResult.getNotLoginResult("登录信息无效，请重新登录");
         }
@@ -159,28 +168,25 @@ public class AdminController {
     public ControllerResult deleteById(@RequestParam(value = "ids") String ids, @RequestParam(value = "emails") String emails, HttpSession session) {
         List<String> idsList = Arrays.asList(ids.split(","));
         List<String> emailsList = Arrays.asList(emails.split(","));
-        //MongoCollection<Document> mgdbCollection = MongoDBUtil.getConnect("questionnaire").getCollection("admins");
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("questionnaire");
-        MongoCollection<Document> collection = mongoDatabase.getCollection("admins");
-        System.out.println(collection.count());
-
+        //使用MongoTemplate连接mongodb数据库，进行操作
+        DBCollection dbCollection = mongoTemplate.getCollection("admins");
         if (SessionUtil.isAdmin(session)) {
             adminService.deleteByIds(idsList);
             logger.info("Delete admin successfully in MySQL");
             //对mongodb进行删除
             //批量删除
-//            for (String email : emailsList) {
-//                Bson filter = Filters.eq("username", email);
-//                mgdbCollection.deleteOne(filter);
-//            }
-//            logger.info("Delete admin successfully in MongDB");
-//            System.out.println("delete in mongdb");
+            for (String email : emailsList) {
+                //A basic implementation of BSON object that is MongoDB specific.
+                // A DBObject can be created as follows, using this class:
+                BasicDBObject query = new BasicDBObject();
+                query.put("username", email);
+                dbCollection.remove(query);
+            }
+            logger.info("Delete admin successfully in MongDB");
             return ControllerResult.getSuccessResult("成功删除用户信息！！！");
         } else {
             return ControllerResult.getFailResult("删除失败用户信息！！！");
         }
-
     }
 
 
@@ -198,9 +204,20 @@ public class AdminController {
     public ControllerResult updatePwd(@Param("pwd") String pwd, @Param("newPwd") String newPwd, @Param("conPwd") String conPwd, HttpSession session) {
         if (SessionUtil.isAdmin(session)) {
             Admin admin = (Admin) session.getAttribute(Constants.SESSION_ADMIN);
+            DBCollection mongoTemplateCollection = mongoTemplate.getCollection("admins");
+            // System.out.println("admin.getID():"+admin.getId()+",admin.getEmail():"+admin.getEmail());
             if (admin.getPwd().equals(EncryptUtil.md5Encrypt(pwd)) && newPwd != null && conPwd != null && newPwd.equals(conPwd)) {
                 admin.setPwd(EncryptUtil.md5Encrypt(newPwd));
                 adminService.updatePassword(admin);
+                logger.info("Update MySQL Successfully!!!");
+                //更新mongodb
+                BasicDBObject query = new BasicDBObject();
+                query.put("username", admin.getEmail());
+                //查找满足条件的
+                DBObject originData = mongoTemplateCollection.findOne(query);
+                originData.put("password", admin.getPwd());
+                mongoTemplateCollection.update(query, originData);
+                logger.info("Update Mongodb Successfully!!!");
                 session.setAttribute(Constants.SESSION_ADMIN, admin);
                 return ControllerResult.getSuccessResult("更新密码成功");
             } else {
@@ -214,9 +231,20 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "update_other_pwd", method = RequestMethod.POST)
     public ControllerResult updateOtherPwd(Admin admin, HttpSession session) {
+        DBCollection mongoTemplateCollection = mongoTemplate.getCollection("admins");
         if (SessionUtil.isAdmin(session)) {
             admin.setPwd(EncryptUtil.md5Encrypt(admin.getPwd()));
+            //由于mysql是根据id更新，所以传过来的email为null，我们需要传相应的email过来
             adminService.updatePassword(admin);
+            logger.info("Update MySQL Successfully!!!");
+            //更新mongodb
+            BasicDBObject query = new BasicDBObject();
+            query.put("username", admin.getEmail());
+            //查找满足条件的
+            DBObject originData = mongoTemplateCollection.findOne(query);
+            originData.put("password", admin.getPwd());
+            mongoTemplateCollection.update(query, originData);
+            logger.info("Update Mongodb Successfully!!!");
             return ControllerResult.getSuccessResult("更新密码成功");
         } else {
             return ControllerResult.getNotLoginResult("登录信息无效，请重新登录");

@@ -62,7 +62,7 @@
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-clear" plain="true"
        onclick="showDelete('${sessionScope.admin.email}');">删除</a>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-       onclick="showUpdatePwd();">修改密码</a>
+       onclick="showUpdatePwd('${sessionScope.admin.email}');">修改密码</a>
     <div class="input_small">
         <form id="searchForm" modalAttribute="admin">
             邮箱:<input type="email" name="email" class="easyui-textbox"/>
@@ -152,6 +152,7 @@
     <div id="errMsg"></div>
     <form:form id="editPwdForm" method="post" modelAttribute="admin">
         <input type="hidden" name="id" />
+        <input type="hidden" name="email" />
         <table class="input_big">
             <tr>
                 <td>新密码:</td>
