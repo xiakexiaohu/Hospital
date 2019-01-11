@@ -18,8 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.net.httpserver.HttpServerImpl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -55,7 +57,7 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "list_page", method = RequestMethod.GET)
-    public ModelAndView toListPage(HttpSession session) throws IOException {
+    public ModelAndView toListPage(HttpServletRequest request, HttpSession session) throws IOException {
         if (SessionUtil.isAdmin(session)) {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("article/articles");
