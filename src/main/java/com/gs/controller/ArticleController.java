@@ -8,6 +8,8 @@ import com.gs.common.bean.Pager4EasyUI;
 import com.gs.common.util.PagerUtil;
 import com.gs.common.web.SessionUtil;
 import com.gs.service.ArticleService;
+import com.gs.utils.FileUtils;
+import com.gs.utils.PropertiesUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -51,11 +55,22 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "list_page", method = RequestMethod.GET)
-    public String toListPage(HttpSession session) {
+    public ModelAndView toListPage(HttpSession session) throws IOException {
         if (SessionUtil.isAdmin(session)) {
-            return "article/articles";
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("article/articles");
+            String configPath =request.getRealPath("/WEB-INF/config/config.properties");
+            String revisitPath = PropertiesUtils.read("revisit.file.path", configPath);
+            List<String> revisitors = FileUtils.getRevisitors(revisitPath);
+            List<String> results = new ArrayList<String>();
+
+            for(int i= 0 ;i<revisitors.size();i++){
+                results.add(revisitors.get(i).split(":")[1]);
+            }
+            modelAndView.addObject("revisitors",results);
+            return modelAndView;
         } else {
-            return "redirect:redirect_login_page";
+            return new ModelAndView("redirect:redirect_login_page");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.gs.controller;
 
+import com.gs.bean.ContactInfo;
 import com.gs.bean.Message;
 import com.gs.common.bean.ControllerResult;
 import com.gs.common.bean.Pager;
@@ -7,6 +8,8 @@ import com.gs.common.bean.Pager4EasyUI;
 import com.gs.common.util.PagerUtil;
 import com.gs.common.web.SessionUtil;
 import com.gs.service.MsgService;
+import com.gs.utils.FileUtils;
+import com.gs.utils.PropertiesUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,11 +56,18 @@ public class MsgController {
     }
 
     @RequestMapping(value = "list_page", method = RequestMethod.GET)
-    public String toListPage(HttpSession session) {
+    public ModelAndView toListPage(HttpServletRequest request, HttpSession session) throws IOException, ParseException {
         if (SessionUtil.isAdmin(session)) {
-            return "message/msgs";
+//            return "message/msgs";
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("message/msgs");
+            String configPath =request.getRealPath("/WEB-INF/config/config.properties");
+            String contatcPath = PropertiesUtils.read("contact.file.path", configPath);
+            List<ContactInfo> contactInfos = FileUtils.getContacts(FileUtils.readFromFile(contatcPath));
+            modelAndView.addObject("contactInfos",contactInfos);
+            return modelAndView;
         } else {
-            return "redirect:redirect_login_page";
+            return new ModelAndView("redirect:redirect_login_page");
         }
     }
 

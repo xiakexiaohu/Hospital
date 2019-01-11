@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
 %>
@@ -71,6 +72,19 @@
 <div class="easyui-window site_win_small input_big" id="addWin" data-options="title:'添加系统消息',resizable:false,mode:true,closed:true" style="width:700px; height: 400px">
     <form:form id="addForm" modelAttribute="msg">
         <table>
+            <c:forEach  items="${contactInfos}" var="p">
+                <tr>
+                    <td>${p.name}</td>
+                    <td>${p.date}</td>
+                    <td>${p.email}</td>
+                    <td>${p.subject}</td>
+                    <td>${p.content}</td>
+                </tr>
+            </c:forEach>
+
+        </table>
+
+        <table>
             <tr>
                 <td>标题:</td>
             </tr>
@@ -98,7 +112,10 @@
             <tr>
                 <td>内容:</td>
             </tr>
-            <tr>
+
+
+
+           <%-- <tr>
 
                 <td>
                 <script id="addEditor" type="text/plain" name="content" style="width: 600px; height: 200px;"></script>
@@ -108,7 +125,7 @@
                 <td>
                     <button type="button" class="easyui-linkbutton" onclick="add();">确认</button>
                 </td>
-            </tr>
+            </tr>--%>
         </table>
     </form:form>
 </div>

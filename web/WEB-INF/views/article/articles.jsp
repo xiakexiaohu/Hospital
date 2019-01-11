@@ -78,6 +78,15 @@
 <div class="easyui-window site_win_small input_big" id="addWin" data-options="title:'添加文章',resizable:false,mode:true,closed:true" style="width:700px; height: 400px">
     <form:form id="addForm" modelAttribute="article">
         <table>
+            <c:forEach  items="${revisitors}" var="p">
+                <tr>
+                    <td>${p}</td>
+                </tr>
+            </c:forEach>
+
+        </table>
+
+        <table>
             <tr>
                 <td>标题:</td>
             </tr>
