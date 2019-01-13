@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
 %>
@@ -79,8 +80,10 @@
        onclick="openAddWinFitPos('addWin', 'addEditor');">添加</a>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
        onclick="showEdit();">修改</a>
+<c:if test="${fn:startsWith(sessionScope.admin.email,'admin@')}">
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-clear" plain="true"
        onclick="showDelete();">删除</a>
+</c:if>
     <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-search" plain="true"
        onclick="seeContent();">查看内容</a>
 

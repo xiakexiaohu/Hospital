@@ -19,7 +19,7 @@ public class RedisUtils {
         // 构建连接池配置信息
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         // 设置最大连接数
-        jedisPoolConfig.setMaxActive(10);
+        jedisPoolConfig.setMaxTotal(10);
         // 超时时间
         int timeout = 1000;
         // 构建连接池

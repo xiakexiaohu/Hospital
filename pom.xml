@@ -9,31 +9,6 @@
     <version>1.0-SNAPSHOT</version>
 
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2/</url>
-            <name>maven2</name>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>central-maven</id>
-            <url>http://central.maven.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <properties>
         <mysql-version>5.1.36</mysql-version>
         <logback-version>1.1.7</logback-version>
@@ -58,11 +33,18 @@
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-        <dependency>
+       <!--<dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.0.0</version>
+            <version>2.8.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.4.2</version>
+        </dependency>-->
+
 
 
         <dependency>
@@ -89,6 +71,8 @@
             <artifactId>spring-core</artifactId>
             <version>4.2.6.RELEASE</version>
         </dependency>
+
+
 
         <!--<dependency>-->
             <!--<groupId>org.mongodb</groupId>-->
@@ -245,25 +229,25 @@
         </dependency>
 
     </dependencies>
-    <build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat8-maven-plugin</artifactId>
                 <configuration>
-                    <!-- 端口号，可自定义 -->
+                    &lt;!&ndash; 端口号，可自定义 &ndash;&gt;
                     <port>8080</port>
-                    <!-- 项目访问路径 -->
+                    &lt;!&ndash; 项目访问路径 &ndash;&gt;
                     <path>/qing</path>
-                    <!-- Tomcat Manager的url访问路径，固定写法 -->
+                    &lt;!&ndash; Tomcat Manager的url访问路径，固定写法 &ndash;&gt;
                     <url>http://localhost:8080/manager/text</url>
-                    <!-- Tomcat Manager的用户名和密码 -->
+                    &lt;!&ndash; Tomcat Manager的用户名和密码 &ndash;&gt;
                     <username>tomcat</username>
                     <password>tomcat</password>
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 
 </project>
