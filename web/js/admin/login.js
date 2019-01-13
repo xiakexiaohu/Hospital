@@ -1,4 +1,5 @@
-var contextPath = '';
+
+var contextPath = '/Hospital_war';
 
 function redirectIndex(needRedirect) {
     if (needRedirect == "redirect") {

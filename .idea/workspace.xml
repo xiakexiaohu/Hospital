@@ -6,17 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ab6adc1-a6b5-4940-9447-48cfbd7b5f3e" name="Default" comment="fix redis pool">
+    <list default="true" id="0ab6adc1-a6b5-4940-9447-48cfbd7b5f3e" name="Default" comment="fix 栏目">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Hospital_war.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gs/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gs/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gs/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gs/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gs/utils/RedisUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gs/utils/RedisUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/config/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/config/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/config/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/config/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/admin/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/admin/login.js" afterDir="false" />
     </list>
     <ignored path="Hospital.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -141,7 +136,8 @@
           <entry key="class" value="7" />
           <entry key="index" value="1" />
           <entry key="java" value="42" />
-          <entry key="jsp" value="18" />
+          <entry key="js" value="1" />
+          <entry key="jsp" value="19" />
           <entry key="properties" value="7" />
           <entry key="sql" value="1" />
           <entry key="xml" value="11" />
@@ -151,7 +147,8 @@
         <counts>
           <entry key="CLASS" value="7" />
           <entry key="JAVA" value="42" />
-          <entry key="JSP" value="18" />
+          <entry key="JSP" value="19" />
+          <entry key="JavaScript" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Properties" value="7" />
           <entry key="SQL" value="1" />
@@ -161,19 +158,21 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="2811" />
-          <entry key="jsp" value="297" />
-          <entry key="properties" value="98" />
+          <entry key="js" value="14" />
+          <entry key="jsp" value="393" />
+          <entry key="properties" value="104" />
           <entry key="sql" value="7" />
-          <entry key="txt" value="73" />
+          <entry key="txt" value="75" />
           <entry key="xml" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="2811" />
-          <entry key="JSP" value="297" />
-          <entry key="PLAIN_TEXT" value="73" />
-          <entry key="Properties" value="98" />
+          <entry key="JSP" value="393" />
+          <entry key="JavaScript" value="14" />
+          <entry key="PLAIN_TEXT" value="75" />
+          <entry key="Properties" value="104" />
           <entry key="SQL" value="7" />
           <entry key="XML" value="40" />
         </counts>
@@ -187,27 +186,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/home.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="66" column="195" selection-start-line="66" selection-start-column="195" selection-end-line="66" selection-end-column="195" />
+            <state relative-caret-position="495">
+              <caret line="81" column="63" lean-forward="true" selection-start-line="81" selection-start-column="63" selection-end-line="81" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/login.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/setting.jsp">
+        <entry file="file://$PROJECT_DIR$/web/js/admin/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-690" />
+            <state relative-caret-position="250">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/admins.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="225">
+              <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -215,8 +228,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/article/articles.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="64" />
+            <state relative-caret-position="525">
+              <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -242,8 +255,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+            <state relative-caret-position="375">
+              <caret line="30" column="60" lean-forward="true" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -266,13 +279,6 @@
             <state relative-caret-position="169">
               <caret line="137" selection-start-line="137" selection-end-line="137" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/info.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1940" />
           </provider>
         </entry>
       </file>
@@ -345,8 +351,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/index/home.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/gs/dao/NewsDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gs/dao/BaseDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gs/service/NewsService.java" />
         <option value="$PROJECT_DIR$/web/js/news/news.js" />
@@ -393,9 +397,11 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/config/config.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/gs/controller/IndexController.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/config/jdbc.properties" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/home.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/config/jdbc.properties" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/login.jsp" />
+        <option value="$PROJECT_DIR$/web/js/admin/login.js" />
       </list>
     </option>
   </component>
@@ -484,6 +490,29 @@
               <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
+              <item name="documents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="Hospital_war" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
@@ -611,53 +640,6 @@
             </path>
             <path>
               <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="article" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="index" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital2" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="news" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital2" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -675,7 +657,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/lib/commons-pool2-2.4.2.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.46569645" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
@@ -1124,7 +1106,7 @@
       <workItem from="1547172698528" duration="13521000" />
       <workItem from="1547190843725" duration="4574000" />
       <workItem from="1547196919934" duration="238000" />
-      <workItem from="1547345191604" duration="13368000" />
+      <workItem from="1547345191604" duration="17171000" />
     </task>
     <task id="LOCAL-00001" summary="留言管理和预约管理">
       <created>1547177356575</created>
@@ -1168,11 +1150,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547358663747</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix 栏目">
+      <created>1547366604905</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1547366604905</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="304451000" />
+    <option name="totallyTimeSpent" value="308254000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1185,7 +1174,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24520256" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -1281,7 +1269,8 @@
     <MESSAGE value="redis支持增刪改查" />
     <MESSAGE value="fix maven redisutils" />
     <MESSAGE value="fix redis pool" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix redis pool" />
+    <MESSAGE value="fix 栏目" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix 栏目" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1356,20 +1345,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/gs/bean/news-mapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/admin/admins.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4900">
-          <caret line="196" column="25" selection-start-line="196" selection-start-column="25" selection-end-line="196" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gs/service/NewsServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="859">
@@ -1661,13 +1636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/config/config.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/info.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1940" />
@@ -1676,34 +1644,6 @@
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/setting.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-690" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/admins.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/article/articles.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/config/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/maven/org/springframework/spring-web/4.2.6.RELEASE/spring-web-4.2.6.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
@@ -1723,10 +1663,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/config/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/config/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/news/news.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="30" column="60" lean-forward="true" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/home.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="66" column="195" selection-start-line="66" selection-start-column="195" selection-end-line="66" selection-end-column="195" />
+        <state relative-caret-position="495">
+          <caret line="81" column="63" lean-forward="true" selection-start-line="81" selection-start-column="63" selection-end-line="81" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/article/articles.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/admins.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/admin/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1747,7 +1739,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>Hospital:war exploded</last-edited>
+          <last-edited>Hospital:war</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
