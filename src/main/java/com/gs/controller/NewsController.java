@@ -7,6 +7,7 @@ import com.gs.common.bean.Pager4EasyUI;
 import com.gs.common.util.PagerUtil;
 import com.gs.common.web.SessionUtil;
 import com.gs.service.NewsService;
+import com.gs.utils.RedisUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,7 @@ public class NewsController {
         if (SessionUtil.isAdmin(session)) {
             news.setPubTime(Calendar.getInstance().getTime());
             newsService.insert(news);
+            RedisUtils.insertNews(news);
             logger.info("Add news successfully");
             return ControllerResult.getSuccessResult("成功添加新闻");
         } else {
@@ -61,7 +63,11 @@ public class NewsController {
         }
         if (SessionUtil.isAdmin(session)) {
 //            newsService.deleteById(ids);
+            for(String id :idsList){
+                RedisUtils.deleteByID(id);
+            }
             newsService.deleteByIds(idsList);
+
             logger.info("Delete news successfully");
             return ControllerResult.getSuccessResult("成功删除新闻");
         } else {
@@ -113,7 +119,9 @@ public class NewsController {
     public ModelAndView queryById(@PathVariable("id") String id, HttpSession session) {
         if (SessionUtil.isAdmin(session)) {
             ModelAndView mav = new ModelAndView("admin/info");
-            News news = newsService.queryById(id);
+            News news = RedisUtils.getNewsByID(id);
+            // News news = newsService.queryById(id);
+
             mav.addObject("news", news);
             return mav;
         }
@@ -125,6 +133,7 @@ public class NewsController {
     public ControllerResult update(News news, HttpSession session) {
         if (SessionUtil.isAdmin(session)) {
             logger.info("update news info successfully");
+            RedisUtils.updateNews(news);
             newsService.update(news);
             return ControllerResult.getSuccessResult("成功更新新闻信息");
         } else {

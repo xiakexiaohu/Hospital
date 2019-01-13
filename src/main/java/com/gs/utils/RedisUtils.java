@@ -57,7 +57,7 @@ public class RedisUtils {
         close(jedis);
     }
 
-    public static void updateByID(News news){
+    public static void updateNews(News news){
         Jedis jedis = getJedis();
         jedis.hset("news",String.valueOf(news.getId()),JSONObject.toJSONString(news));
         close(jedis);
@@ -88,9 +88,9 @@ public class RedisUtils {
 
 
         news.setAuthor("tl");
-        updateByID(news);
+        updateNews(news);
 
-        deleteByID("id");
+        deleteByID("1");
     }
 
 }
