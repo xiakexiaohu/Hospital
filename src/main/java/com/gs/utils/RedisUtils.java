@@ -90,7 +90,7 @@ public class RedisUtils {
         news.setAuthor("tl");
         updateByID(news);
 
-        deleteByID("id");
+        deleteByID("1");
     }
 
 }
