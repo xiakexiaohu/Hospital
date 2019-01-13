@@ -31,53 +31,38 @@
     <script type="text/javascript" charset="utf-8" src="<%=path %>/ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="<%=path %>/ueditor/lang/zh-cn/zh-cn.js"></script>
 
+
     <script type="text/javascript">
         function type(value) {
             return value.name;
         }
     </script>
-    <style type="text/css">
-        table.gridtable {
-            font-family: verdana,arial,sans-serif;
-            font-size:11px;
-            color:#333333;
-            border-width: 1px;
-            border-color: #666666;
-            border-collapse: collapse;
-        }
-        table.gridtable th {
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #666666;
-            background-color: #dedede;
-        }
-        table.gridtable td {
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #666666;
-            background-color: #ffffff;
-        }
-    </style>
+
 </head>
 <body>
 
 <div  style="width:700px; height: 400px">
     <form:form id="addForm" >
-        <table class="gridtable">
-            <tr>
-                <td>今天预约患者姓名</td>
+        <table style=" font-family: verdana,arial,sans-serif;
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;">
+            <tr style=" border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">
+                <th>今天预约患者姓名</th>
             </tr>
             <c:forEach items="${revisitors}" var="node">
-                ${node}
                 <tr>
-                    <td><c:out value="${node}"></c:out></td>
+                    <td style=" border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;"><c:out value="${node}"></c:out></td>
                 </tr>
             </c:forEach>
 
         </table>
-
     </form:form>
 </div>
 </body>

@@ -57,11 +57,11 @@
             <%--<a href="javascript:void(0);" src="<%=path %>/article/list_page" class="site-navi-tab">文章列表</a></p>--%>
         <%--</div>--%>
             <div title="留言管理" class="site_menu">
-            <a href="javascript:void(0);" src="<%=path %>/msg/list_page" class="site-navi-tab">消息列表</a></p>
+            <a href="javascript:void(0);" src="<%=path %>/msg/list_page" class="site-navi-tab">今日留言</a></p>
             </div>
             <div title="预约管理" class="site_menu">
-                <a href="javascript:void(0);" src="<%=path %>/articleType/list_page" class="site-navi-tab">文章类型列表</a></p>
-                <a href="javascript:void(0);" src="<%=path %>/article/list_page" class="site-navi-tab">文章列表</a></p>
+                <%--<a href="javascript:void(0);" src="<%=path %>/articleType/list_page" class="site-navi-tab">文章类型列表</a></p>--%>
+                <a href="javascript:void(0);" src="<%=path %>/article/list_page" class="site-navi-tab">今日预约</a></p>
             </div>
             <div title="问卷管理" class="site_menu">
                 <a href="javascript:void(0)"  src="http://localhost:8081/manage/login?username=${sessionScope.admin.email }&password=${sessionScope.admin.pwd }"  class="site-navi-tab">问卷测试</a></p>

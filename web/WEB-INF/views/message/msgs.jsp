@@ -59,21 +59,66 @@
 
 <div style="width:700px; height: 400px">
     <form:form id="addForm">
-        <table class="gridtable">
+        <table  style=" font-family: verdana,arial,sans-serif;
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;">
             <tr>
-                <td>姓名</td>
-                <td>日期</td>
-                <td>邮箱</td>
-                <td>主题</td>
-                <td>内容</td>
+                <th style="border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;">姓名</th>
+                <th style="border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;">日期</th>
+                <th style="border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;">邮箱</th>
+                <th style="border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;">主题</th>
+                <th style="border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;">内容</th>
             </tr>
             <c:forEach items="${contactInfos}" var="p">
                 <tr>
-                    <td>${p.name}</td>
-                    <td>${p.date}</td>
-                    <td>${p.email}</td>
-                    <td>${p.subject}</td>
-                    <td>${p.content}</td>
+                    <td style=" border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;">${p.name}</td>
+                    <td style=" border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;">${p.date}</td>
+                    <td style=" border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;">${p.email}</td>
+                    <td style=" border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;">${p.subject}</td>
+                    <td style=" border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;">${p.content}</td>
                 </tr>
             </c:forEach>
         </table>
