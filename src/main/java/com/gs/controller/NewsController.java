@@ -151,7 +151,8 @@ public class NewsController {
     @RequestMapping(value = "queryById/{id}", method = RequestMethod.GET)
     public ModelAndView userQueryById(@PathVariable("id") String id) {
         ModelAndView mav = new ModelAndView("news/newsDetail");
-        News news = newsService.queryById(id);
+        //News news = newsService.queryById(id);
+        News news = RedisUtils.getNewsByID(id);
         mav.addObject("news", news);
         return mav;
     }

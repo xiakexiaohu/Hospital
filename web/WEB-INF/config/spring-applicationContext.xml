@@ -26,12 +26,19 @@
     <!--<constructor-arg name="databaseName" value="${mongo.dbname}"/>-->
     <!--</bean>-->
 
-    <!-- 默认访问127.0.0.1：27017 -->
+    <!-- 默认访问127.0.0.1：27017，这里我们用的是问卷的网站的ip地址-->
+    <!--<mongo:db-factory id="mongoDbFactory" host="202.119.84.10" port="27017" dbname="questionnaire"/>-->
+    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">-->
+        <!--<constructor-arg ref="mongoDbFactory" />-->
+        <!--<property name="writeConcern" value="SAFE" />-->
+    <!--</bean>-->
+    <!-- 默认访问127.0.0.1：27017-->
     <mongo:db-factory id="mongoDbFactory" dbname="questionnaire"/>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongoDbFactory" />
         <property name="writeConcern" value="SAFE" />
     </bean>
+
 
 
 </beans>

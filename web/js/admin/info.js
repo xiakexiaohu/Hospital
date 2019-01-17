@@ -1,4 +1,4 @@
-var contextPath = '';
+var contextPath = '..';
 
 function edit(id) {
     toValidate("editForm");
