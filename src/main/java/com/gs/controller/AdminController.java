@@ -10,12 +10,9 @@ import com.gs.common.util.PagerUtil;
 import com.gs.common.web.SessionUtil;
 import com.gs.service.AdminService;
 import com.mongodb.*;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.ibatis.annotations.Param;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -25,17 +22,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.apache.commons.httpclient.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.net.UnknownHostException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
 
 /**
  * Created by WangGenshen on 5/16/16.
@@ -46,6 +43,10 @@ public class AdminController {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+    /**
+     * 问卷服务器地址
+     */
+    private static String urlPrefix = "http://mbigdata.njust.edu.cn/manage/";
 
     @Resource
     private AdminService adminService;
@@ -87,24 +88,61 @@ public class AdminController {
         return "redirect:login_page";
     }
 
+
+    /**
+     * 建立连接，传递后缀参数
+     *
+     * @param urlSuffix
+     */
+    public void connectionUrl(String urlSuffix) {
+        HttpClient client = new HttpClient();
+        GetMethod method = new GetMethod(urlPrefix + urlSuffix);
+        method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(3, false));
+        try {
+            int statusCode = client.executeMethod(method);
+            if (statusCode != org.apache.http.HttpStatus.SC_OK) {
+                System.err.println("Method failed: " + method.getStatusLine());
+            }
+            byte[] responseBody = method.getResponseBody();
+            System.out.println(new String(responseBody));
+
+        } catch (HttpException e) {
+            System.out.println("Fatal protocal violation:" + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Fatal transport error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            method.releaseConnection();
+        }
+    }
+
     @ResponseBody
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ControllerResult add(Admin admin, HttpSession session) {
         if (SessionUtil.isAdmin(session)) {
             admin.setPwd(EncryptUtil.md5Encrypt(admin.getPwd()));
-            adminService.insert(admin);
-            DBCollection mongoTemplateCollection = mongoTemplate.getCollection("admins");
-            logger.info("Add admin successfully in MySQL");
-            BasicDBObject basicDBObject = new BasicDBObject();
-            basicDBObject.put("username", admin.getEmail());
-            basicDBObject.put("password", admin.getPwd());
-            mongoTemplateCollection.insert(basicDBObject);
-            logger.info("Insert into MongoDB Successfully!!!");
-            return ControllerResult.getSuccessResult("成功添加管理员");
+            int flagInsert = adminService.insert(admin);
+            if (flagInsert == 1) {
+                logger.info("Add admin successfully in MySQL");
+                //由于问卷服务器在内网，所以采用url的方式GET方式提交
+                String urlSuffix = "add?username=" + admin.getEmail() + "&password=" + admin.getPwd();
+                //建立连接
+                connectionUrl(urlSuffix);
+                logger.info("Insert into MongoDB Successfully!!!");
+                return ControllerResult.getSuccessResult("成功添加管理员");
+            } else {
+                return ControllerResult.getFailResult("添加失败，可能存在相同邮箱！！！");
+            }
+//            DBCollection mongoTemplateCollection = mongoTemplate.getCollection("admins");
+//            BasicDBObject basicDBObject = new BasicDBObject();
+//            basicDBObject.put("username", admin.getEmail());
+//            basicDBObject.put("password", admin.getPwd());
+//            mongoTemplateCollection.insert(basicDBObject);
         } else {
-            return ControllerResult.getNotLoginResult("登录信息无效，请重新登录");
+            return ControllerResult.getNotLoginResult("登录信息无效，请重新登录！！！");
         }
     }
+
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
     public String home(HttpSession session) {
@@ -175,12 +213,15 @@ public class AdminController {
             logger.info("Delete admin successfully in MySQL");
             //对mongodb进行删除
             //批量删除
+
             for (String email : emailsList) {
-                //A basic implementation of BSON object that is MongoDB specific.
-                // A DBObject can be created as follows, using this class:
-                BasicDBObject query = new BasicDBObject();
-                query.put("username", email);
-                dbCollection.remove(query);
+                String urlSuffix = "delete?username=" + email;
+                connectionUrl(urlSuffix);
+//                //A basic implementation of BSON object that is MongoDB specific.
+//                // A DBObject can be created as follows, using this class:
+//                BasicDBObject query = new BasicDBObject();
+//                query.put("username", email);
+//                dbCollection.remove(query);
             }
             logger.info("Delete admin successfully in MongDB");
             return ControllerResult.getSuccessResult("成功删除用户信息！！！");
@@ -199,6 +240,14 @@ public class AdminController {
         }
     }
 
+    /**
+     * 用户自己修改密码
+     * @param pwd
+     * @param newPwd
+     * @param conPwd
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "update_pwd", method = RequestMethod.POST)
     public ControllerResult updatePwd(@Param("pwd") String pwd, @Param("newPwd") String newPwd, @Param("conPwd") String conPwd, HttpSession session) {
@@ -211,12 +260,14 @@ public class AdminController {
                 adminService.updatePassword(admin);
                 logger.info("Update MySQL Successfully!!!");
                 //更新mongodb
-                BasicDBObject query = new BasicDBObject();
-                query.put("username", admin.getEmail());
-                //查找满足条件的
-                DBObject originData = mongoTemplateCollection.findOne(query);
-                originData.put("password", admin.getPwd());
-                mongoTemplateCollection.update(query, originData);
+                String urlSuffix = "update?username=" + admin.getEmail() + "&password=" + admin.getPwd();
+                connectionUrl(urlSuffix);
+//                BasicDBObject query = new BasicDBObject();
+//                query.put("username", admin.getEmail());
+//                //查找满足条件的
+//                DBObject originData = mongoTemplateCollection.findOne(query);
+//                originData.put("password", admin.getPwd());
+//                mongoTemplateCollection.update(query, originData);
                 logger.info("Update Mongodb Successfully!!!");
                 session.setAttribute(Constants.SESSION_ADMIN, admin);
                 return ControllerResult.getSuccessResult("更新密码成功");
@@ -228,6 +279,12 @@ public class AdminController {
         }
     }
 
+    /**
+     * 管理员修改密码
+     * @param admin
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "update_other_pwd", method = RequestMethod.POST)
     public ControllerResult updateOtherPwd(Admin admin, HttpSession session) {
@@ -238,12 +295,14 @@ public class AdminController {
             adminService.updatePassword(admin);
             logger.info("Update MySQL Successfully!!!");
             //更新mongodb
-            BasicDBObject query = new BasicDBObject();
-            query.put("username", admin.getEmail());
-            //查找满足条件的
-            DBObject originData = mongoTemplateCollection.findOne(query);
-            originData.put("password", admin.getPwd());
-            mongoTemplateCollection.update(query, originData);
+            String urlSuffix = "update?username=" + admin.getEmail() + "&password=" + admin.getPwd();
+            connectionUrl(urlSuffix);
+//            BasicDBObject query = new BasicDBObject();
+//            query.put("username", admin.getEmail());
+//            //查找满足条件的
+//            DBObject originData = mongoTemplateCollection.findOne(query);
+//            originData.put("password", admin.getPwd());
+//            mongoTemplateCollection.update(query, originData);
             logger.info("Update Mongodb Successfully!!!");
             return ControllerResult.getSuccessResult("更新密码成功");
         } else {
