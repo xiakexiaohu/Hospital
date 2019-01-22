@@ -47,6 +47,7 @@ public class AdminController {
      * 问卷服务器地址
      */
     private static String urlPrefix = "http://mbigdata.njust.edu.cn/manage/";
+//    private static String urlPrefix = "http://localhost:8081/manage/";
 
     @Resource
     private AdminService adminService;
@@ -254,7 +255,6 @@ public class AdminController {
         if (SessionUtil.isAdmin(session)) {
             Admin admin = (Admin) session.getAttribute(Constants.SESSION_ADMIN);
             DBCollection mongoTemplateCollection = mongoTemplate.getCollection("admins");
-            // System.out.println("admin.getID():"+admin.getId()+",admin.getEmail():"+admin.getEmail());
             if (admin.getPwd().equals(EncryptUtil.md5Encrypt(pwd)) && newPwd != null && conPwd != null && newPwd.equals(conPwd)) {
                 admin.setPwd(EncryptUtil.md5Encrypt(newPwd));
                 adminService.updatePassword(admin);
@@ -262,12 +262,6 @@ public class AdminController {
                 //更新mongodb
                 String urlSuffix = "update?username=" + admin.getEmail() + "&password=" + admin.getPwd();
                 connectionUrl(urlSuffix);
-//                BasicDBObject query = new BasicDBObject();
-//                query.put("username", admin.getEmail());
-//                //查找满足条件的
-//                DBObject originData = mongoTemplateCollection.findOne(query);
-//                originData.put("password", admin.getPwd());
-//                mongoTemplateCollection.update(query, originData);
                 logger.info("Update Mongodb Successfully!!!");
                 session.setAttribute(Constants.SESSION_ADMIN, admin);
                 return ControllerResult.getSuccessResult("更新密码成功");
@@ -297,12 +291,6 @@ public class AdminController {
             //更新mongodb
             String urlSuffix = "update?username=" + admin.getEmail() + "&password=" + admin.getPwd();
             connectionUrl(urlSuffix);
-//            BasicDBObject query = new BasicDBObject();
-//            query.put("username", admin.getEmail());
-//            //查找满足条件的
-//            DBObject originData = mongoTemplateCollection.findOne(query);
-//            originData.put("password", admin.getPwd());
-//            mongoTemplateCollection.update(query, originData);
             logger.info("Update Mongodb Successfully!!!");
             return ControllerResult.getSuccessResult("更新密码成功");
         } else {
