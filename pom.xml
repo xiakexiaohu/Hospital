@@ -26,7 +26,7 @@
         <fasterxml-version>2.7.4</fasterxml-version>
         <logback-ext-spring-version>0.1.4</logback-ext-spring-version>
         <kaptcha-version>2.3.2</kaptcha-version>
-        <fastjson-version>1.2.14</fastjson-version>
+        <fastjson-version>1.2.25</fastjson-version>
         <codec-version>1.9</codec-version>
         <io-version>2.4</io-version>
     </properties>
