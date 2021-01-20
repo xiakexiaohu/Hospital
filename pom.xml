@@ -23,7 +23,7 @@
         <commons-lang-version>3.4</commons-lang-version>
         <jackson-version>1.9.13</jackson-version>
         <aspectj-version>1.8.8</aspectj-version>
-        <fasterxml-version>2.7.4</fasterxml-version>
+        <fasterxml-version>2.9.10.7</fasterxml-version>
         <logback-ext-spring-version>0.1.4</logback-ext-spring-version>
         <kaptcha-version>2.3.2</kaptcha-version>
         <fastjson-version>1.2.14</fastjson-version>
