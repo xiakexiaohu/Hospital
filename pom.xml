@@ -28,7 +28,7 @@
         <kaptcha-version>2.3.2</kaptcha-version>
         <fastjson-version>1.2.14</fastjson-version>
         <codec-version>1.9</codec-version>
-        <io-version>2.4</io-version>
+        <io-version>2.7</io-version>
     </properties>
 
     <dependencies>
